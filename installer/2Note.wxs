@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 2Note MSI installer: per-user, no admin required.
+     Installs the add-in DLL + config to %LOCALAPPDATA%\2Note and registers
+     the COM class + OneNote AddIns entry under HKCU (HKCU Classes takes
+     precedence over any older HKLM registration). -->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="2Note" Language="2052" Version="1.0.0.0" Codepage="936"
+           Manufacturer="2Note Project" UpgradeCode="{BA681A76-D971-4841-8867-8A188A73AAD4}">
+    <Package InstallerVersion="300" Compressed="yes" InstallScope="perUser"
+             Description="2Note - Paste as native OneNote structure"
+             Comments="Per-user install. No admin required. Restart OneNote after install."
+             Platform="x64" />
+    <MajorUpgrade DowngradeErrorMessage="检测到更高版本的 2Note 已安装。/ A newer version of 2Note is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="2Note" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <Property Id="ARPNOREPAIR" Value="1" />
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="INSTALLFOLDER" Name="2Note" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="MainComponent" Guid="{8ABC89B3-F506-4F46-A0E8-46DDEFB5A0CF}" Win64="yes">
+        <File Id="AddinDll" Name="MD2OneNote.Addin.dll" Source="$(var.SourceDir)\MD2OneNote.Addin.dll" />
+        <File Id="SetHotkeyPs1" Name="set-hotkey.ps1" Source="$(var.SourceDir)\set-hotkey.ps1" />
+        <File Id="HotkeyTxt" Name="hotkey.txt" Source="$(var.SourceDir)\hotkey.txt" />
+        <File Id="ReadmeMd" Name="README.md" Source="$(var.SourceDir)\README.md" />
+        <RemoveFolder Id="RemoveINSTALLFOLDER" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\2Note\Installed" Name="Version" Type="string" Value="1.0.0.0" KeyPath="yes" />
+
+        <!-- COM class registration (HKCU wins over any older HKLM manual registration) -->
+        <RegistryKey Root="HKCU" Key="Software\Classes\CLSID\{4A9D4FBD-D100-41EF-9C9C-7CD1DB2EE81B}\InprocServer32" >
+          <RegistryValue Type="string" Value="mscoree.dll" />
+          <RegistryValue Name="Assembly" Type="string" Value="MD2OneNote.Addin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <RegistryValue Name="Class" Type="string" Value="MD2OneNote.Connect" />
+          <RegistryValue Name="RuntimeVersion" Type="string" Value="v4.0.30319" />
+          <RegistryValue Name="CodeBase" Type="string" Value="[INSTALLFOLDER]MD2OneNote.Addin.dll" />
+          <RegistryValue Name="ThreadingModel" Type="string" Value="Both" />
+        </RegistryKey>
+
+        <!-- OneNote AddIns registration (machine-readable LoadBehavior=3) -->
+        <RegistryKey Root="HKCU" Key="Software\Microsoft\Office\OneNote\AddIns\MD2OneNote.Connect">
+          <RegistryValue Name="LoadBehavior" Type="integer" Value="3" />
+          <RegistryValue Name="FriendlyName" Type="string" Value="2Note" />
+          <RegistryValue Name="Description" Type="string" Value="Paste HTML/Markdown as native OneNote structure" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

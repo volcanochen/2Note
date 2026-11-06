@@ -1,0 +1,6 @@
+# 2Note hotkey config
+# 第一个非 # 行为生效的组合键；修改后重启 OneNote 生效。
+# 也可以运行同目录的 set-hotkey.ps1 配置（会先检测组合键是否被占用）。
+# 格式：Ctrl/Alt/Shift/Win 至少一个 + 主键（A-Z / 0-9 / F1-F24 / Home/End/Insert/Delete/PageUp/PageDown/方向键/Space/Tab/Enter/Backspace/Esc）
+# 示例：Ctrl+Alt+P    Ctrl+Shift+V    Win+F9
+Alt+Shift+V

@@ -1,0 +1,23 @@
+# whitelist-style ignore: only ship the product source, docs, installer and release
+/*
+
+# tracked paths
+!/.gitignore
+!/README.md
+!/LICENSE
+!/src/
+!/docs/
+!/installer/
+!/release/
+
+# inside installer/: keep project + build scripts only (WiX binaries are 34MB)
+/installer/wix311/
+/installer/wix311-binaries.zip
+/installer/*.wixpdb
+
+# inside release/: keep MSI + portable zip + notes (skip intermediate pdb)
+/release/*.wixpdb
+
+# misc
+Thumbs.db
+src/MD2OneNote.Addin.dll
