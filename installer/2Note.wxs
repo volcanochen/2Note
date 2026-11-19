@@ -4,7 +4,7 @@
      the COM class + OneNote AddIns entry under HKCU (HKCU Classes takes
      precedence over any older HKLM registration). -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="2Note" Language="2052" Version="1.0.0.0" Codepage="936"
+  <Product Id="*" Name="2Note" Language="2052" Version="1.1.0.0" Codepage="936"
            Manufacturer="2Note Project" UpgradeCode="{BA681A76-D971-4841-8867-8A188A73AAD4}">
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perUser"
              Description="2Note - Paste as native OneNote structure"
@@ -36,12 +36,12 @@
         <File Id="HotkeyTxt" Name="hotkey.txt" Source="$(var.SourceDir)\hotkey.txt" />
         <File Id="ReadmeMd" Name="README.md" Source="$(var.SourceDir)\README.md" />
         <RemoveFolder Id="RemoveINSTALLFOLDER" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="Software\2Note\Installed" Name="Version" Type="string" Value="1.0.0.0" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="Software\2Note\Installed" Name="Version" Type="string" Value="1.1.0.0" KeyPath="yes" />
 
         <!-- COM class registration (HKCU wins over any older HKLM manual registration) -->
         <RegistryKey Root="HKCU" Key="Software\Classes\CLSID\{4A9D4FBD-D100-41EF-9C9C-7CD1DB2EE81B}\InprocServer32" >
           <RegistryValue Type="string" Value="mscoree.dll" />
-          <RegistryValue Name="Assembly" Type="string" Value="MD2OneNote.Addin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <RegistryValue Name="Assembly" Type="string" Value="MD2OneNote.Addin, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null" />
           <RegistryValue Name="Class" Type="string" Value="MD2OneNote.Connect" />
           <RegistryValue Name="RuntimeVersion" Type="string" Value="v4.0.30319" />
           <RegistryValue Name="CodeBase" Type="string" Value="[INSTALLFOLDER]MD2OneNote.Addin.dll" />

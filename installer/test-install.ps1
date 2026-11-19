@@ -1,6 +1,6 @@
 # test-install.ps1 - install the built MSI quietly and verify registration
 $ErrorActionPreference = 'Continue'
-$msi = "C:\Users\adminlocal\WorkBuddy\2026-11-04-15-46-33\release\2Note-Setup-1.0.0.msi"
+$msi = "C:\Users\adminlocal\WorkBuddy\2026-11-04-15-46-33\release\2Note-Setup-1.1.0.msi"
 $p = Start-Process msiexec.exe -ArgumentList "/i", "`"$msi`"", "/qn", "/l*v", "$env:TEMP\2note-install.log" -Wait -PassThru
 Write-Output ("msiexec exit code: " + $p.ExitCode)
 Write-Output ("dll installed: " + (Test-Path "$env:LOCALAPPDATA\2Note\MD2OneNote.Addin.dll"))

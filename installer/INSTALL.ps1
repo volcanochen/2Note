@@ -8,7 +8,7 @@ $clsid = '{4A9D4FBD-D100-41EF-9C9C-7CD1DB2EE81B}'
 $k = "HKCU:\Software\Classes\CLSID\$clsid\InprocServer32"
 New-Item -Path $k -Force | Out-Null
 Set-ItemProperty -Path $k -Name '(default)'      -Value 'mscoree.dll'
-Set-ItemProperty -Path $k -Name 'Assembly'       -Value 'MD2OneNote.Addin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'
+Set-ItemProperty -Path $k -Name 'Assembly'       -Value 'MD2OneNote.Addin, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null'
 Set-ItemProperty -Path $k -Name 'Class'          -Value 'MD2OneNote.Connect'
 Set-ItemProperty -Path $k -Name 'RuntimeVersion' -Value 'v4.0.30319'
 Set-ItemProperty -Path $k -Name 'CodeBase'       -Value $codeBase

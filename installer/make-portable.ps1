@@ -1,4 +1,4 @@
-# make-portable.ps1 - build release\2Note-1.0.0-portable.zip
+# make-portable.ps1 - build release\2Note-1.1.0-portable.zip
 $ErrorActionPreference = 'Stop'
 $ws      = Split-Path $PSScriptRoot -Parent
 $src     = Join-Path $ws 'src'
@@ -14,7 +14,7 @@ Copy-Item (Join-Path $ws  'README.md')            $stage -Force
 Copy-Item (Join-Path $PSScriptRoot 'INSTALL.ps1')   $stage -Force
 Copy-Item (Join-Path $PSScriptRoot 'UNINSTALL.ps1') $stage -Force
 
-$zip = Join-Path $release '2Note-1.0.0-portable.zip'
+$zip = Join-Path $release '2Note-1.1.0-portable.zip'
 if (Test-Path $zip) { Remove-Item $zip -Force }
 Compress-Archive -Path "$stage\*" -DestinationPath $zip -Force
 $z = Get-Item $zip

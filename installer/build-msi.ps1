@@ -21,7 +21,7 @@ New-Item -ItemType Directory -Force -Path $obj, $release | Out-Null
 & $candle -nologo -arch x64 "-dSourceDir=$src" -out "$obj\2Note.wixobj" (Join-Path $PSScriptRoot '2Note.wxs')
 if ($LASTEXITCODE -ne 0) { throw "candle failed ($LASTEXITCODE)" }
 
-$msi = Join-Path $release '2Note-Setup-1.0.0.msi'
+$msi = Join-Path $release '2Note-Setup-1.1.0.msi'
 & $light -nologo -out $msi "$obj\2Note.wixobj"
 if ($LASTEXITCODE -ne 0) { throw "light failed ($LASTEXITCODE)" }
 
